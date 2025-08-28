@@ -9,10 +9,8 @@ In line with **SDG 9 *(Industry, Innovation & Infrastructure)*** and **SDG 16 *(
 **Impact:** Securing IoT networks helps keep critical infrastructure - such as smart cities, healthcare, and energy systems - safe and reliable. **Concretely,** this means hospital sensor networks remain stable and smart city street lighting is protected from attack-driven disruptions.
 
 [Dataset index](https://www.notion.so/Dataset-index-25898c6768cd80579f7dcc23e99f9c7a?pvs=21)
-
 [Stakeholder summary](https://www.notion.so/Stakeholder-summary-25898c6768cd8087997ac77af2b84b6b?pvs=21)
 
-# IoT Flow Duration Prediction using Regression
 
 ## Summary
 This project predicts **flow duration** in IoT (Internet of Things) network traffic using regression machine learning models.  
