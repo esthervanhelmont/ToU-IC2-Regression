@@ -1,12 +1,15 @@
 import joblib
+from pathlib import Path
 import numpy as np
 import pandas as pd
 
-# Zet hier het juiste pad naar je model
-model_path = "../final model/best_pipeline_gbr.joblib"
+# Absoluut pad naar je model
+model_path = Path("/Users/esthervanhelmont/Documents/#Python/IC2 Regression/final model/best_pipeline_gbr.joblib")
 
-# Laad je model
+# Model laden
 loaded_model = joblib.load(model_path)
+print("✅ Model loaded:", model_path)
+
 
 
 # Build per-service p90 thresholds from TRAIN data
