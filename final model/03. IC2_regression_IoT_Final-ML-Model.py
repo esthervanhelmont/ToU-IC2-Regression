@@ -1,44 +1,41 @@
-import joblib
+# Simple predictor: load saved pipeline, score a CSV, save predictions
+# Paths are RELATIVE to this script (placed in: final model/)
+
 from pathlib import Path
-import numpy as np
+import joblib
 import pandas as pd
+import numpy as np
 
-# Absoluut pad naar je model
-model_path = Path("/Users/esthervanhelmont/Documents/#Python/IC2 Regression/final model/best_pipeline_gbr.joblib")
+# --- Config ---
+# If your model was trained on log(target), keep this True to invert with expm1
+LOG_TARGET = True
 
-# Model laden
-loaded_model = joblib.load(model_path)
-print("✅ Model loaded:", model_path)
+# Relative paths
+MODEL_PATH = Path("best_pipeline_gbr.joblib")  # file lives next to this script
+DATA_PATH  = Path("../data/processed/rt_iot2022_Test-sample_Final-model.csv")  # adjust if your filename differs
+OUT_PATH   = Path("predictions.csv")
 
+# --- Load model ---
+model = joblib.load(MODEL_PATH)
+print(f"✅ Loaded model: {MODEL_PATH.resolve()}")
 
+# --- Load data (features only; no target column) ---
+X = pd.read_csv(DATA_PATH)
+print(f"✅ Loaded data: {DATA_PATH.resolve()}  shape={X.shape}")
 
-# Build per-service p90 thresholds from TRAIN data
-train_with_service = X_train.copy()
-train_with_service["flow_duration"] = np.expm1(y_train_log)
-service_p90 = (
-    train_with_service.groupby("service")["flow_duration"]
-    .quantile(0.85)
-    .to_dict()
-)
+# --- Predict ---
+y_pred = model.predict(X)
+if LOG_TARGET:
+    y_pred = np.expm1(y_pred)  # invert log1p/ln transformation
 
-# Make predictions for the first N test rows
-N = 10
-pred_log = loaded_model.predict(X_test[:N])
-pred_sec = np.expm1(pred_log)
-
-# Create a DataFrame for flagging (don't call it 'results' to avoid name clash)
-flags_df = pd.DataFrame({
-    "service": X_test.loc[X_test.index[:N], "service"].values if "service" in X_test.columns else ["-"] * N,
-    "Predicted_flow_duration_sec": pred_sec.round(2)
+# --- Build output table (show service if present) ---
+out = pd.DataFrame({
+    "service": X["service"] if "service" in X.columns else ["-"] * len(X),
+    "predicted_flow_duration_sec": np.round(y_pred, 2)
 })
 
-# Flag rows whose prediction is above the p90 for their own service
-def mark_redflag(row):
-    s = row["service"]
-    val = row["Predicted_flow_duration_sec"]
-    thr = service_p90.get(s, np.inf)
-    return "⚠️" if val > thr else ""
-
-flags_df["RedFlag"] = flags_df.apply(mark_redflag, axis=1)
-
-print(flags_df.to_string(index=False))
+# --- Save & preview ---
+out.to_csv(OUT_PATH, index=False)
+print(f"💾 Saved predictions → {OUT_PATH.resolve()}")
+print("\nPreview:")
+print(out.head(10).to_string(index=False))
