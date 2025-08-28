@@ -10,7 +10,7 @@ In line with **SDG 9 *(Industry, Innovation & Infrastructure)*** and **SDG 16 *(
 
 [Dataset index](https://www.notion.so/Dataset-index-25898c6768cd80579f7dcc23e99f9c7a?pvs=21)
 
-[Stakeholder summary](https://www.notion.so/Stakeholder-summary-25898c6768cd8087997ac77af2b84b6b?pvs=21)
+[Stakeholder report](https://www.notion.so/Stakeholder-summary-25898c6768cd8087997ac77af2b84b6b?pvs=21)
 
 
 ## Summary
