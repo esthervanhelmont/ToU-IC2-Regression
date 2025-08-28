@@ -51,7 +51,7 @@ scikit-learn
 
 joblib
 
-**Usage**
+Usage
 Preprocessing: Run the notebook
 
 bash
@@ -59,15 +59,15 @@ Code kopiëren
 jupyter notebook "01. IC2_regression_IoT_Preprocessing.ipynb"
 → Cleans data, explores features, applies transformations.
 
-**Modeling: Run the notebook
-**
+Modeling: Run the notebook
+
 bash
 Code kopiëren
 jupyter notebook "02. IC2_regression_IoT_ML.ipynb"
 → Trains multiple regression models, compares results, and saves the best pipeline.
 
-**Prediction (example):
-**
+Prediction (example):
+
 python
 Code kopiëren
 import joblib
@@ -98,8 +98,11 @@ artifacts/: Saved ML pipeline(s)
 
 requirements.txt: Dependencies
 
-**Ethical Notes**
+Ethical Notes
 Bias & Generalization: Dataset may not represent all IoT environments → results might not generalize to unseen devices/networks.
+
 Fairness: Since target is numeric, fairness risks are limited. However, imbalance in service types could bias performance.
+
 Transparency: Preprocessing and random seeds were fixed to ensure reproducibility.
+
 Impact: Early anomaly detection in IoT networks helps prevent outages and cyberattacks, strengthening reliability of critical infrastructure (healthcare, smart cities, energy).
