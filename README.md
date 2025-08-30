@@ -87,4 +87,7 @@ For comparison, here are the key results of all tested models:
 
 **Takeaway:** Linear models performed poorly due to the non-linear nature of IoT traffic. Tree-based models (Random Forest, Gradient Boosting) captured complex patterns much better, with Gradient Boosting achieving the highest accuracy and lowest error.  
 
+**With this model, we can flag unusually long network flows early and support faster response to potential attacks or malfunctions.**  
+
+
 
